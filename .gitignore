@@ -53,5 +53,8 @@ bench.txt
 # coverage
 coverage.*
 
+# collectors
+bin/
+
 # tools
 tools/bin/

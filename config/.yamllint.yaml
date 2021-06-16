@@ -1,0 +1,21 @@
+# https://yamllint.readthedocs.io/en/latest/rules.html
+# https://yamllint.readthedocs.io/en/latest/configuration.html
+---
+extends: default
+locale: en_US.UTF-8
+
+rules:
+  document-start: disable
+  truthy: false
+  indentation:
+    spaces: 2
+    indent-sequences: whatever
+    check-multi-line-strings: false
+  comments-indentation: disable
+  line-length:
+    max: 220
+    allow-non-breakable-words: true
+    allow-non-breakable-inline-mappings: false
+  trailing-spaces: enable
+  brackets:
+    max-spaces-inside: 1

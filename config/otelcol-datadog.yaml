@@ -1,0 +1,57 @@
+# https://github.com/open-telemetry/opentelemetry-collector-builder/blob/v0.27.0/internal/builder/config.go
+---
+dist:
+  module: "github.com/zchee/opentelemetry-collectors/otelcol-datadog"
+  name: "../bin/otelcol-datadog"
+  description: "Datadog OpenTelemetry Collector"
+  include_core: false
+  otelcol_version: "0.28.0"
+  output_path: "otelcol-datadog"
+  version: "v0.0.0"
+
+receivers:
+  - gomod: "go.opentelemetry.io/collector v0.28.0"
+    import: "go.opentelemetry.io/collector/receiver/otlpreceiver"
+    name: "otlpreceiver"
+
+processors:
+  - gomod: "go.opentelemetry.io/collector v0.28.0"
+    import: "go.opentelemetry.io/collector/processor/batchprocessor"
+    name: "batchprocessor"
+
+exporters:
+  - gomod: "github.com/open-telemetry/opentelemetry-collector-contrib/exporter/datadogexporter v0.28.0"
+    import: "github.com/open-telemetry/opentelemetry-collector-contrib/exporter/datadogexporter"
+    name: "datadogexporter"
+  - gomod: "go.opentelemetry.io/collector v0.28.0"
+    import: "go.opentelemetry.io/collector/exporter/fileexporter"
+    name: "fileexporter"
+  - gomod: "go.opentelemetry.io/collector v0.28.0"
+    import: "go.opentelemetry.io/collector/exporter/jaegerexporter"
+    name: "jaegerexporter"
+  - gomod: "go.opentelemetry.io/collector v0.28.0"
+    import: "go.opentelemetry.io/collector/exporter/loggingexporter"
+    name: "loggingexporter"
+
+extensions:
+  - gomod: "go.opentelemetry.io/collector v0.28.0"
+    import: "go.opentelemetry.io/collector/extension/bearertokenauthextension"
+    name: "bearertokenauthextension"
+  - gomod: "go.opentelemetry.io/collector v0.28.0"
+    import: "go.opentelemetry.io/collector/extension/healthcheckextension"
+    name: "healthcheckextension"
+  - gomod: "go.opentelemetry.io/collector v0.28.0"
+    import: "go.opentelemetry.io/collector/extension/oidcauthextension"
+    name: "oidcauthextension"
+  - gomod: "go.opentelemetry.io/collector v0.28.0"
+    import: "go.opentelemetry.io/collector/extension/pprofextension"
+    name: "pprofextension"
+  - gomod: "go.opentelemetry.io/collector v0.28.0"
+    import: "go.opentelemetry.io/collector/extension/zpagesextension"
+    name: "zpagesextension"
+
+replaces:
+  # for compiler error
+  - github.com/open-telemetry/opentelemetry-collector-contrib/internal/common => github.com/open-telemetry/opentelemetry-collector-contrib/internal/common v0.28.0
+  # use upstream datadogexporter
+  - github.com/open-telemetry/opentelemetry-collector-contrib/exporter/datadogexporter => github.com/DataDog/opentelemetry-collector-contrib/exporter/datadogexporter datadog_update_top_level_computation
